@@ -227,9 +227,12 @@ JavaScript functionality was also tested for:
 
 ### Deployment
 
-The website is prepared for deployment using GitHub Pages.
+The Bakes by MK website has been deployed using GitHub Pages.
 
-The final deployment URL will be added to this README after GitHub Pages has been enabled and tested.
+Live website:
+https://deric04.github.io/WEDE5020-POE/
+
+The deployed website was tested after publication to confirm that the pages, navigation, images, JavaScript functionality, forms and responsive layout work correctly.
 
 ### Part 3 Changelog
 
