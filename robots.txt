@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /evidence/
+
+Sitemap: https://deric04.github.io/WEDE5020-POE/sitemap.xml

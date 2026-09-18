@@ -1,45 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-          content="Bakes by MK - Freshly baked cakes, cupcakes, brownies, pastries and custom celebration cakes in Centurion and Groblersdal, South Africa.">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <meta name="keywords"
-          content="Bakes by MK, bakery, cakes, cupcakes, brownies, pastries, celebration cakes, Centurion, Groblersdal">
+    <meta
+        name="description"
+        content="Bakes by MK offers freshly baked cakes, cupcakes, brownies, cookies, pastries and custom celebration cakes in Centurion and Groblersdal, South Africa.">
 
-    <meta name="author" content="Tshephang Matsepe">
+    <meta
+        name="keywords"
+        content="Bakes by MK, bakery, cakes, cupcakes, brownies, cookies, pastries, custom cakes, celebration cakes, Centurion bakery, Groblersdal bakery, South Africa">
+
+    <meta
+        name="author"
+        content="Tshephang Matsepe">
 
     <title>Bakes by MK | Home</title>
 
-    <link rel="stylesheet" href="css/style.css">
+   <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
+
+    <!-- Local Business SEO Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Bakery",
+        "name": "Bakes by MK",
+        "description": "Freshly baked cakes, cupcakes, brownies, cookies, pastries and custom celebration cakes.",
+        "url": "https://deric04.github.io/WEDE5020-POE/",
+        "areaServed": [
+            {
+                "@type": "City",
+                "name": "Centurion"
+            },
+            {
+                "@type": "City",
+                "name": "Groblersdal"
+            }
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "ZA"
+        }
+    }
+    </script>
+
 </head>
 
+
 <body>
+
 
     <!-- Header -->
     <header>
 
         <!-- Business Logo -->
         <div class="logo">
+
             <a href="index.html">
-                <img src="images/logo.png"
-                     alt="Bakes by MK bakery logo"
-                     width="150">
+
+                <img
+                    src="images/logo.png"
+                    alt="Bakes by MK bakery logo"
+                    width="150">
+
             </a>
+
         </div>
+
 
         <!-- Website Navigation -->
         <nav aria-label="Main navigation">
+
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="enquiry.html">Enquiry</a></li>
-                <li><a href="contact.html">Contact</a></li>
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                <li>
+                    <a href="products.html">Products</a>
+                </li>
+
+                <li>
+                    <a href="enquiry.html">Enquiry</a>
+                </li>
+
+                <li>
+                    <a href="contact.html">Contact</a>
+                </li>
+
             </ul>
+
         </nav>
 
     </header>
@@ -47,6 +113,7 @@
 
     <!-- Main Content -->
     <main>
+
 
         <!-- Hero Section -->
         <section id="hero">
@@ -66,30 +133,41 @@
                     Centurion, Gauteng.
                 </p>
 
-                <a href="products.html">Explore Our Products</a>
+                <a href="products.html">
+                    Explore Our Products
+                </a>
 
-                <a href="enquiry.html">Make an Enquiry</a>
+                <a href="enquiry.html">
+                    Make an Enquiry
+                </a>
 
             </div>
 
+
             <div class="hero-image">
 
-     <picture>
-    <source
-        srcset="images/hero-bakery.jpg"
-        media="(max-width: 600px)">
-    <source
-        srcset="images/hero-bakery.jpg"
-        media="(max-width: 900px)">
-    <img
-        src="images/hero-bakery.jpg"
-        srcset="images/hero-bakery.jpg 1200w"
-        sizes="(max-width: 600px) 100vw,
-               (max-width: 900px) 50vw,
-               50vw"
-        alt="Freshly baked Bakes by MK bakery products">
-</picture>
-                     
+                <picture>
+
+                    <source
+                        srcset="images/hero-bakery.jpg"
+                        media="(max-width: 600px)">
+
+                    <source
+                        srcset="images/hero-bakery.jpg"
+                        media="(max-width: 900px)">
+
+                    <img
+                        src="images/hero-bakery.jpg"
+                        srcset="images/hero-bakery.jpg 1200w"
+                        sizes="(max-width: 600px) 100vw,
+                               (max-width: 900px) 50vw,
+                               50vw"
+                        alt="Freshly baked Bakes by MK bakery products"
+                        width="1200"
+                        height="800"
+                        fetchpriority="high">
+
+                </picture>
 
             </div>
 
@@ -127,9 +205,15 @@
 
             <h2>Featured Products</h2>
 
+
             <article>
-                <img src="images/cakes.jpg"
-                     alt="Freshly baked cakes">
+
+                <img
+                    src="images/cakes.jpg"
+                    alt="Freshly baked cakes from Bakes by MK"
+                    loading="lazy"
+                    width="800"
+                    height="600">
 
                 <h3>Cakes</h3>
 
@@ -138,13 +222,21 @@
                     and special occasions.
                 </p>
 
-                <a href="products.html">View Cakes</a>
+                <a href="products.html">
+                    View Cakes
+                </a>
+
             </article>
 
 
             <article>
-                <img src="images/cupcakes.jpg"
-                     alt="Decorated cupcakes">
+
+                <img
+                    src="images/cupcakes.jpg"
+                    alt="Decorated cupcakes from Bakes by MK"
+                    loading="lazy"
+                    width="800"
+                    height="600">
 
                 <h3>Cupcakes</h3>
 
@@ -153,13 +245,21 @@
                     celebrations and special events.
                 </p>
 
-                <a href="products.html">View Cupcakes</a>
+                <a href="products.html">
+                    View Cupcakes
+                </a>
+
             </article>
 
 
             <article>
-                <img src="images/brownies.jpg"
-                     alt="Freshly baked brownies">
+
+                <img
+                    src="images/brownies.jpg"
+                    alt="Freshly baked brownies from Bakes by MK"
+                    loading="lazy"
+                    width="800"
+                    height="600">
 
                 <h3>Brownies</h3>
 
@@ -168,13 +268,21 @@
                     lovers.
                 </p>
 
-                <a href="products.html">View Brownies</a>
+                <a href="products.html">
+                    View Brownies
+                </a>
+
             </article>
 
 
             <article>
-                <img src="images/celebration-cakes.jpg"
-                     alt="Custom celebration cake">
+
+                <img
+                    src="images/celebration-cakes.jpg"
+                    alt="Custom celebration cake from Bakes by MK"
+                    loading="lazy"
+                    width="800"
+                    height="600">
 
                 <h3>Celebration Cakes</h3>
 
@@ -183,7 +291,10 @@
                     special moments memorable.
                 </p>
 
-                <a href="enquiry.html">Request a Custom Cake</a>
+                <a href="enquiry.html">
+                    Request a Custom Cake
+                </a>
+
             </article>
 
         </section>
@@ -195,12 +306,31 @@
             <h2>Why Choose Bakes by MK?</h2>
 
             <ul>
-                <li>Freshly prepared baked products</li>
-                <li>Creative and attractive designs</li>
-                <li>Products made with care and attention</li>
-                <li>Custom celebration cake options</li>
-                <li>Service available in Centurion and Groblersdal</li>
-                <li>Customer-focused service</li>
+
+                <li>
+                    Freshly prepared baked products
+                </li>
+
+                <li>
+                    Creative and attractive designs
+                </li>
+
+                <li>
+                    Products made with care and attention
+                </li>
+
+                <li>
+                    Custom celebration cake options
+                </li>
+
+                <li>
+                    Service available in Centurion and Groblersdal
+                </li>
+
+                <li>
+                    Customer-focused service
+                </li>
+
             </ul>
 
         </section>
@@ -217,9 +347,13 @@
                 ready to help.
             </p>
 
-            <a href="enquiry.html">Make an Enquiry</a>
+            <a href="enquiry.html">
+                Make an Enquiry
+            </a>
 
-            <a href="contact.html">Contact Us</a>
+            <a href="contact.html">
+                Contact Us
+            </a>
 
         </section>
 
@@ -237,18 +371,44 @@
             Groblersdal, Limpopo &amp; Centurion, Gauteng, South Africa
         </p>
 
+        <p>
+            Freshly baked products and custom cakes for celebrations,
+            events and everyday enjoyment.
+        </p>
+
         <nav aria-label="Footer navigation">
+
             <a href="index.html">Home</a> |
             <a href="about.html">About</a> |
             <a href="products.html">Products</a> |
             <a href="enquiry.html">Enquiry</a> |
             <a href="contact.html">Contact</a>
+
         </nav>
+
+        <p>
+
+            <a href="contact.html">
+                Contact Bakes by MK
+            </a>
+
+            |
+
+            <a href="enquiry.html">
+                Make an Enquiry
+            </a>
+
+        </p>
 
     </footer>
 
 
-    <script src="js/script.js"></script>
+    <!-- JavaScript -->
+    <script
+        src="js/script.js"
+        defer>
+    </script>
 
 </body>
+
 </html>

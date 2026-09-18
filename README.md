@@ -104,8 +104,150 @@ The References section received 2/5 marks, with feedback indicating that more de
 - W3C. (n.d.). Web Standards. Available at: https://www.w3.org/standards/ (Accessed: 18 September 2026).
 
 - GitHub. (n.d.). GitHub Documentation. Available at: https://docs.github.com/ (Accessed: 18 September 2026).
-- ## Part 3 – Enhancing Functionality and SEO
 
-Part 3 will focus on adding JavaScript functionality and interaction, improving SEO, implementing and validating forms, testing the website, and deploying the completed website.
+## Part 3 – Enhancing Functionality and SEO
 
-The Part 3 development work and changes will be documented in the changelog.
+Part 3 focused on improving the functionality, accessibility, SEO and user experience of the Bakes by MK website.
+
+### JavaScript Functionality
+
+JavaScript was implemented through the external `js/script.js` file.
+
+The following interactive features were added:
+
+* Product search functionality on the Products page.
+* Dynamic filtering of product cards based on the user's search.
+* A no-results message when no matching products are found.
+* FAQ accordion functionality on the About page.
+* Dynamic enquiry form fields based on the selected enquiry type.
+* Client-side HTML and JavaScript form validation.
+* Email format validation.
+* Phone number validation.
+* Minimum message-length validation.
+* AJAX form submission.
+* Submission success and error messages.
+* Form reset functionality.
+
+### Enquiry Form
+
+The Enquiry page contains a structured HTML form that allows customers to provide:
+
+* Full name.
+* Email address.
+* Phone number.
+* Enquiry type.
+* Product selection.
+* Preferred date.
+* Quantity.
+* Collection or delivery preference.
+* Preferred location.
+* Additional requirements.
+
+The enquiry form supports product, service, volunteer and sponsorship enquiries.
+
+When volunteer or sponsorship enquiries are selected, product-related fields are disabled because they are not required for those enquiry types.
+
+The form is submitted using AJAX through Formspree and provides feedback to the user after submission.
+
+### Contact Form
+
+The Contact page contains a validated contact form allowing users to provide:
+
+* Full name.
+* Email address.
+* Message type.
+* Full message.
+
+The contact form uses JavaScript validation and AJAX submission through Formspree.
+
+The form displays a success message after a successful submission and an error message if submission fails.
+
+### Search and Interactive Features
+
+The Products page includes a search feature that allows users to search product names and descriptions.
+
+The About page includes an interactive FAQ accordion that allows users to expand and collapse answers.
+
+These features improve usability by allowing visitors to find information without navigating away from the current page.
+
+### SEO Improvements
+
+SEO improvements were implemented across the website.
+
+These include:
+
+* Unique page titles.
+* Page-specific meta descriptions.
+* Relevant keyword metadata.
+* Descriptive image `alt` attributes.
+* Descriptive image filenames.
+* Semantic HTML structure.
+* Proper heading hierarchy.
+* Internal navigation links between pages.
+* Favicon implementation.
+* Responsive design for mobile devices.
+* Lazy loading for product images.
+* Responsive hero image handling using the `<picture>` element.
+* Local business structured data on the Home page.
+* `robots.txt`.
+* `sitemap.xml`.
+
+### Performance and Accessibility
+
+Performance and accessibility improvements include:
+
+* Responsive layouts for desktop, tablet and mobile devices.
+* Relative CSS units such as `rem` and percentages.
+* Responsive images.
+* Lazy loading of non-critical product images.
+* Descriptive alternative text for images.
+* Accessible navigation labels.
+* Accessible form labels.
+* `aria-live` feedback areas for form submissions and search results.
+* `aria-expanded` states for FAQ controls.
+* Keyboard-focus styling.
+
+### Testing
+
+The website was tested across different screen sizes and the following responsive evidence was recorded:
+
+* `evidence/desktop-view.png`
+* `evidence/tablet-view.png`
+* `evidence/mobile-view.png`
+
+JavaScript functionality was also tested for:
+
+* Product searching.
+* FAQ interaction.
+* Enquiry form validation.
+* Enquiry form submission.
+* Contact form validation.
+* Contact form submission.
+* Form reset functionality.
+
+### Deployment
+
+The website is prepared for deployment using GitHub Pages.
+
+The final deployment URL will be added to this README after GitHub Pages has been enabled and tested.
+
+### Part 3 Changelog
+
+* Added JavaScript product search and filtering.
+* Added interactive FAQ accordion.
+* Added enquiry form validation.
+* Added contact form validation.
+* Added AJAX form submission using Formspree.
+* Added dynamic enquiry fields for different enquiry types.
+* Added success and error feedback for forms.
+* Added page-specific SEO metadata.
+* Added descriptive image alternative text.
+* Added lazy loading to product images.
+* Added responsive image handling for the hero section.
+* Added local business structured data.
+* Added favicon links.
+* Added `robots.txt`.
+* Added `sitemap.xml`.
+* Added responsive and accessibility improvements.
+* Added responsive testing evidence.
+* Added project video section using HTML5 video.
