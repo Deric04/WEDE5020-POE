@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Submit a bakery product or custom cake enquiry to Bakes by MK.">
+
+    <meta name="author" content="Tshephang Matsepe">
+
+    <title>Bakes by MK | Enquiry</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png"
+                     alt="Bakes by MK bakery logo"
+                     width="150">
+            </a>
+        </div>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="enquiry.html">Enquiry</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Page Header -->
+        <section class="page-header">
+
+            <h1>Make an Enquiry</h1>
+
+            <p>
+                Tell us what you are looking for and provide the details
+                of your order.
+            </p>
+
+        </section>
+
+
+        <!-- Enquiry Form -->
+        <section id="enquiry-form">
+
+            <h2>Customer Enquiry Form</h2>
+
+            <form action="#" method="post">
+
+                <!-- Full Name -->
+                <div class="form-group">
+
+                    <label for="full-name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="full-name"
+                        name="full-name"
+                        placeholder="Enter your full name"
+                        required>
+
+                </div>
+
+
+                <!-- Email -->
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        required>
+
+                </div>
+
+
+                <!-- Phone -->
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter your phone number"
+                        required>
+
+                </div>
+
+
+                <!-- Product Selection -->
+                <div class="form-group">
+
+                    <label for="product">
+                        Product Selection
+                    </label>
+
+                    <select id="product"
+                            name="product"
+                            required>
+
+                        <option value="">
+                            -- Select a Product --
+                        </option>
+
+                        <option value="cakes">
+                            Cakes
+                        </option>
+
+                        <option value="cupcakes">
+                            Cupcakes
+                        </option>
+
+                        <option value="brownies">
+                            Brownies
+                        </option>
+
+                        <option value="cookies">
+                            Cookies
+                        </option>
+
+                        <option value="pastries">
+                            Pastries
+                        </option>
+
+                        <option value="celebration-cakes">
+                            Celebration Cakes
+                        </option>
+
+                        <option value="custom-cake">
+                            Custom Cake Design
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Preferred Date -->
+                <div class="form-group">
+
+                    <label for="preferred-date">
+                        Preferred Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="preferred-date"
+                        name="preferred-date"
+                        required>
+
+                </div>
+
+
+                <!-- Quantity -->
+                <div class="form-group">
+
+                    <label for="quantity">
+                        Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantity"
+                        name="quantity"
+                        min="1"
+                        placeholder="Enter quantity"
+                        required>
+
+                </div>
+
+
+                <!-- Collection / Delivery -->
+                <fieldset>
+
+                    <legend>
+                        Collection or Delivery Preference
+                    </legend>
+
+                    <div>
+
+                        <input
+                            type="radio"
+                            id="collection"
+                            name="delivery-preference"
+                            value="collection"
+                            required>
+
+                        <label for="collection">
+                            Collection
+                        </label>
+
+                    </div>
+
+
+                    <div>
+
+                        <input
+                            type="radio"
+                            id="delivery"
+                            name="delivery-preference"
+                            value="delivery">
+
+                        <label for="delivery">
+                            Delivery
+                        </label>
+
+                    </div>
+
+                </fieldset>
+
+
+                <!-- Location -->
+                <div class="form-group">
+
+                    <label for="location">
+                        Preferred Location
+                    </label>
+
+                    <select id="location"
+                            name="location">
+
+                        <option value="">
+                            -- Select Location --
+                        </option>
+
+                        <option value="centurion">
+                            Centurion, Gauteng
+                        </option>
+
+                        <option value="groblersdal">
+                            Groblersdal, Limpopo
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Additional Requirements -->
+                <div class="form-group">
+
+                    <label for="requirements">
+                        Additional Requirements
+                    </label>
+
+                    <textarea
+                        id="requirements"
+                        name="requirements"
+                        rows="8"
+                        placeholder="Describe your requirements, preferred design, flavour, theme, colours or any other information..."></textarea>
+
+                </div>
+
+
+                <!-- Submit -->
+                <div class="form-group">
+
+                    <button type="submit">
+                        Submit Enquiry
+                    </button>
+
+                    <button type="reset">
+                        Clear Form
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- Enquiry Information -->
+        <section id="enquiry-information">
+
+            <h2>Custom Orders</h2>
+
+            <p>
+                For customised celebration cakes, please provide as much
+                information as possible about your preferred design,
+                theme, colours, quantity and date.
+            </p>
+
+            <p>
+                Our team can then review your requirements and respond
+                to your enquiry.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            &copy; 2026 Bakes by MK. All rights reserved.
+        </p>
+
+        <p>
+            Groblersdal, Limpopo &amp; Centurion, Gauteng, South Africa
+        </p>
+
+        <nav aria-label="Footer navigation">
+            <a href="index.html">Home</a> |
+            <a href="about.html">About</a> |
+            <a href="products.html">Products</a> |
+            <a href="enquiry.html">Enquiry</a> |
+            <a href="contact.html">Contact</a>
+        </nav>
+
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
