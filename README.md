@@ -254,3 +254,12 @@ The deployed website was tested after publication to confirm that the pages, nav
 * Added responsive and accessibility improvements.
 * Added responsive testing evidence.
 * Added project video section using HTML5 video.
+
+## Changelog
+
+### Part 3 – 19 October 2026
+
+- Improved responsive navigation for smaller screens and touch devices based on Part 2 feedback.
+- Added an interactive Google Maps embed to the contact page, with a link to get directions.
+- Added a product image lightbox so visitors can enlarge images and close the viewer using the close button, outside click, or Escape key.
+- Improved the lightbox presentation for different screen sizes.

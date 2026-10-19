@@ -1119,20 +1119,22 @@ fieldset legend {
 }
 
 .map-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
+    width: 100%;
     max-width: 900px;
-    height: 280px;
+    height: 350px;
     margin: 0 auto;
-    border: 2px dashed #c77b6b;
+    overflow: hidden;
+    border: 2px solid #c77b6b;
     border-radius: 10px;
     background-color: #fff8f5;
 }
 
-.map-placeholder p {
-    color: #6b5148;
-    font-weight: 600;
+.map-placeholder iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 
 
@@ -1363,4 +1365,142 @@ fieldset legend {
     margin: 0 auto;
     border-radius: 0.5rem;
     box-shadow: var(--shadow);
+}
+
+
+/* =========================================
+   PART 2 FEEDBACK FIX: RESPONSIVE NAVIGATION
+   ========================================= */
+
+/* Keep the header and navigation usable on tablets and smaller laptops. */
+@media (max-width: 900px) {
+    header {
+        gap: 1rem;
+        padding: 1rem 5%;
+    }
+
+    header nav {
+        width: 100%;
+    }
+
+    header nav ul {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        row-gap: 0.5rem;
+        column-gap: 1rem;
+    }
+
+    header nav li {
+        min-width: 0;
+    }
+
+    header nav a {
+        display: inline-block;
+        padding: 0.5rem 0.65rem;
+        text-align: center;
+        overflow-wrap: anywhere;
+    }
+}
+
+/* Make mobile navigation easy to read and tap without horizontal overflow. */
+@media (max-width: 600px) {
+    header {
+        position: sticky;
+        padding: 0.75rem 1rem;
+        gap: 0.5rem;
+    }
+
+    .logo img {
+        width: 120px;
+        max-width: 100%;
+    }
+
+    header nav {
+        width: 100%;
+    }
+
+    header nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        gap: 0.25rem;
+        margin-top: 0.5rem;
+    }
+
+    header nav li {
+        width: 100%;
+    }
+
+    header nav a {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        padding: 0.65rem 0.75rem;
+        border-radius: 0.35rem;
+        text-align: center;
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+    }
+
+    header nav a:hover,
+    header nav a:focus-visible {
+        background-color: #fff1eb;
+    }
+}
+
+/* Respect reduced-motion preferences for visitors who request them. */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+/* Product gallery lightbox */
+.image-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.88);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.image-lightbox.active {
+    display: flex;
+}
+
+.image-lightbox img {
+    max-width: 90%;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+#lightbox-caption {
+    color: white;
+    text-align: center;
+    margin-top: 12px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 42px;
+    cursor: pointer;
 }
