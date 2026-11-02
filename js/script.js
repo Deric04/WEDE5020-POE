@@ -1,594 +1,384 @@
-// =========================================
-// BAKES BY MK - JAVASCRIPT
-// =========================================
-
 document.addEventListener("DOMContentLoaded", function () {
+    // Product search and filtering
+    const productSearch = document.getElementById("productSearch");
+    const productItems = document.querySelectorAll(".product-card");
 
-    console.log("Bakes by MK website loaded successfully.");
+    if (productSearch && productItems.length > 0) {
+        productSearch.addEventListener("input", function () {
+            const searchTerm = productSearch.value.toLowerCase().trim();
 
-    // =========================================
-    // PRODUCT SEARCH
-    // =========================================
-
-    const searchInput = document.getElementById("product-search");
-    const productCards = document.querySelectorAll(".product-card");
-    const searchMessage = document.getElementById("search-message");
-
-    if (searchInput) {
-
-        searchInput.addEventListener("input", function () {
-
-            const searchTerm =
-                searchInput.value.toLowerCase().trim();
-
-            let visibleProducts = 0;
-
-            productCards.forEach(function (card) {
-
-                const productName =
-                    card.querySelector("h3").textContent.toLowerCase();
-
-                const productDescription =
-                    card.querySelector("p").textContent.toLowerCase();
-
-                if (
-                    productName.includes(searchTerm) ||
-                    productDescription.includes(searchTerm)
-                ) {
-
-                    card.style.display = "";
-                    visibleProducts++;
-
-                } else {
-
-                    card.style.display = "none";
-
-                }
-
+            productItems.forEach(function (item) {
+                const productText = item.textContent.toLowerCase();
+                item.style.display = productText.includes(searchTerm) ? "" : "none";
             });
-
-            if (searchMessage) {
-
-                if (
-                    searchTerm !== "" &&
-                    visibleProducts === 0
-                ) {
-
-                    searchMessage.textContent =
-                        "No products found. Please try another search.";
-
-                } else {
-
-                    searchMessage.textContent = "";
-
-                }
-
-            }
-
         });
-
     }
 
-
-    // =========================================
-    // FAQ ACCORDION
-    // =========================================
-
-    const faqQuestions =
-        document.querySelectorAll(".faq-question");
+    // FAQ accordion
+    const faqQuestions = document.querySelectorAll(".faq-question");
 
     faqQuestions.forEach(function (question) {
-
         question.addEventListener("click", function () {
+            const answer = question.nextElementSibling;
 
-            const answer =
-                question.nextElementSibling;
-
-            const isOpen =
-                answer.style.display === "block";
-
-            if (isOpen) {
-
-                answer.style.display = "none";
-
-                question.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-            } else {
-
-                answer.style.display = "block";
-
-                question.setAttribute(
-                    "aria-expanded",
-                    "true"
-                );
-
+            if (!answer) {
+                return;
             }
 
-        });
+            const isExpanded = question.getAttribute("aria-expanded") === "true";
 
+            question.setAttribute("aria-expanded", String(!isExpanded));
+            answer.hidden = isExpanded;
+        });
     });
 
+    // Shared form helpers
+    function showResponse(form, message, type) {
+        let response = form.querySelector(".form-response");
 
-    // =========================================
-    // ENQUIRY FORM
-    // VALIDATION + AJAX SUBMISSION
-    // =========================================
-
-    const enquiryForm =
-        document.getElementById("enquiry-form");
-
-    const enquiryType =
-        document.getElementById("enquiry-type");
-
-    const enquiryResponse =
-        document.getElementById("enquiry-response");
-
-    const productField =
-        document.getElementById("product");
-
-    const dateField =
-        document.getElementById("preferred-date");
-
-    const quantityField =
-        document.getElementById("quantity");
-
-
-    // -----------------------------------------
-    // Enquiry Field Control
-    // -----------------------------------------
-
-    function updateEnquiryFields() {
-
-        if (
-            !enquiryType ||
-            !productField ||
-            !dateField ||
-            !quantityField
-        ) {
-            return;
+        if (!response) {
+            response = document.createElement("div");
+            response.className = "form-response";
+            response.setAttribute("role", "status");
+            response.setAttribute("aria-live", "polite");
+            form.prepend(response);
         }
 
-        if (
-            enquiryType.value === "volunteer" ||
-            enquiryType.value === "sponsor"
-        ) {
-
-            productField.removeAttribute("required");
-            dateField.removeAttribute("required");
-            quantityField.removeAttribute("required");
-
-            productField.disabled = true;
-            dateField.disabled = true;
-            quantityField.disabled = true;
-
-        } else {
-
-            productField.setAttribute(
-                "required",
-                "required"
-            );
-
-            dateField.setAttribute(
-                "required",
-                "required"
-            );
-
-            quantityField.setAttribute(
-                "required",
-                "required"
-            );
-
-            productField.disabled = false;
-            dateField.disabled = false;
-            quantityField.disabled = false;
-
-        }
-
+        response.textContent = message;
+        response.className = "form-response " + type;
     }
 
+    function clearResponse(form) {
+        const response = form.querySelector(".form-response");
 
-    if (enquiryType) {
+        if (response) {
+            response.textContent = "";
+            response.className = "form-response";
+        }
+    }
 
-        enquiryType.addEventListener(
-            "change",
-            updateEnquiryFields
+   function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+    function isValidPhone(phone) {
+        const digits = phone.replace(/\D/g, "");
+        return digits.length >= 9 && digits.length <= 15;
+    }
+
+    function isWebSubmissionAction(form) {
+        const action = form.getAttribute("action");
+
+        if (!action) {
+            return false;
+        }
+
+        try {
+            const url = new URL(action, window.location.href);
+            return url.protocol === "https:" || url.protocol === "http:";
+        } catch (error) {
+            return false;
+        }
+    }
+
+    // Enquiry form
+   const enquiryForm = document.getElementById("enquiry-form");
+
+    if (enquiryForm) {
+        const enquiryType = enquiryForm.querySelector(
+            'select[name="enquiry-type"], input[name="enquiry-type"]:checked'
+        );
+        const conditionalFields = enquiryForm.querySelectorAll(
+            ".conditional-field"
         );
 
-        updateEnquiryFields();
+        function updateConditionalFields() {
+            const selectedType = enquiryForm.querySelector(
+                'select[name="enquiry-type"], input[name="enquiry-type"]:checked'
+            );
 
-    }
+            const selectedValue = selectedType ? selectedType.value.toLowerCase() : "";
 
+            conditionalFields.forEach(function (field) {
+                const fieldType = (
+                    field.dataset.type ||
+                    field.getAttribute("data-enquiry-type") ||
+                    ""
+                ).toLowerCase();
 
-    // -----------------------------------------
-    // Enquiry Form Submission
-    // -----------------------------------------
+                const shouldShow =
+                    !fieldType ||
+                    fieldType === selectedValue ||
+                    selectedValue === "volunteer" ||
+                    selectedValue === "sponsor";
 
-    if (
-        enquiryForm &&
-        enquiryType &&
-        enquiryResponse
-    ) {
+                field.hidden = !shouldShow;
 
-        enquiryForm.addEventListener(
-            "submit",
-            async function (event) {
-
-                event.preventDefault();
-
-
-                // HTML validation
-                if (!enquiryForm.checkValidity()) {
-
-                    enquiryForm.reportValidity();
-
-                    return;
-
-                }
-
-
-                // Email validation
-                const emailField =
-                    document.getElementById("email");
-
-                const emailPattern =
-                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-                if (
-                    emailField &&
-                    !emailPattern.test(
-                        emailField.value.trim()
-                    )
-                ) {
-
-                    emailField.setCustomValidity(
-                        "Please enter a valid email address."
-                    );
-
-                    enquiryForm.reportValidity();
-
-                    emailField.setCustomValidity("");
-
-                    return;
-
-                }
-
-
-                // Phone validation
-                const phoneField =
-                    document.getElementById("phone");
-
-                const phonePattern =
-                    /^[0-9+\s()-]{7,20}$/;
-
-
-                if (
-                    phoneField &&
-                    !phonePattern.test(
-                        phoneField.value.trim()
-                    )
-                ) {
-
-                    phoneField.setCustomValidity(
-                        "Please enter a valid phone number."
-                    );
-
-                    enquiryForm.reportValidity();
-
-                    phoneField.setCustomValidity("");
-
-                    return;
-
-                }
-
-
-                // Show submission message
-                enquiryResponse.textContent =
-                    "Submitting your enquiry...";
-
-                enquiryResponse.style.display =
-                    "block";
-
-
-                try {
-
-                    const response =
-                        await fetch(
-                            enquiryForm.action,
-                            {
-                                method: "POST",
-
-                                body:
-                                    new FormData(
-                                        enquiryForm
-                                    ),
-
-                                headers: {
-                                    "Accept":
-                                        "application/json"
-                                }
-                            }
-                        );
-
-
-                    if (response.ok) {
-
-                        enquiryResponse.textContent =
-                            "Thank you for your enquiry. " +
-                            "Your details have been submitted successfully. " +
-                            "We will review your request and contact you with " +
-                            "availability, pricing or further information.";
-
-                        enquiryForm.reset();
-
-                        updateEnquiryFields();
-
-                    } else {
-
-                        enquiryResponse.textContent =
-                            "There was a problem submitting your enquiry. " +
-                            "Please try again later.";
-
+                field.querySelectorAll("input, select, textarea").forEach(
+                    function (input) {
+                        input.disabled = !shouldShow;
                     }
-
-                } catch (error) {
-
-                    console.error(
-                        "Enquiry submission error:",
-                        error
-                    );
-
-                    enquiryResponse.textContent =
-                        "Unable to submit your enquiry at this time. " +
-                        "Please check your internet connection and try again.";
-
-                }
-
-            }
-        );
-
-    }
-
-
-    // -----------------------------------------
-    // Clear Enquiry Response When Reset
-    // -----------------------------------------
-
-    if (
-        enquiryForm &&
-        enquiryResponse
-    ) {
-
-        enquiryForm.addEventListener(
-            "reset",
-            function () {
-
-                enquiryResponse.textContent = "";
-
-                enquiryResponse.style.display =
-                    "none";
-
-                setTimeout(
-                    function () {
-
-                        updateEnquiryFields();
-
-                    },
-                    0
                 );
+            });
+        }
 
-            }
-        );
+        if (enquiryType || conditionalFields.length > 0) {
+            updateConditionalFields();
 
-    }
+            const enquiryTypeControls = enquiryForm.querySelectorAll(
+                'select[name="enquiry-type"], input[name="enquiry-type"]'
+            );
 
+            enquiryTypeControls.forEach(function (control) {
+                control.addEventListener("change", updateConditionalFields);
+            });
+        }
 
-    // =========================================
-// CONTACT FORM
-// VALIDATION + AJAX SUBMISSION
-// =========================================
-
-const contactForm =
-    document.getElementById("contact-form");
-
-const contactName =
-    document.getElementById("contact-name");
-
-const contactEmail =
-    document.getElementById("contact-email");
-
-const messageType =
-    document.getElementById("message-type");
-
-const contactMessage =
-    document.getElementById("contact-message");
-
-const contactResponse =
-    document.getElementById("contact-response");
-
-
-if (
-    contactForm &&
-    contactName &&
-    contactEmail &&
-    messageType &&
-    contactMessage &&
-    contactResponse
-) {
-
-    contactForm.addEventListener(
-        "submit",
-        async function (event) {
-
+        enquiryForm.addEventListener("submit", async function (event) {
             event.preventDefault();
+            clearResponse(enquiryForm);
 
-            // HTML validation
-            if (!contactForm.checkValidity()) {
-
-                contactForm.reportValidity();
-
-                return;
-
-            }
-
-
-            // Additional email validation
-            const emailPattern =
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-            if (
-                !emailPattern.test(
-                    contactEmail.value.trim()
-                )
-            ) {
-
-                contactEmail.setCustomValidity(
-                    "Please enter a valid email address."
+            if (!enquiryForm.checkValidity()) {
+                enquiryForm.reportValidity();
+                showResponse(
+                    enquiryForm,
+                    "Please complete all required fields correctly before submitting your enquiry.",
+                    "error"
                 );
-
-                contactForm.reportValidity();
-
-                contactEmail.setCustomValidity("");
-
                 return;
-
             }
 
+            const emailInput = enquiryForm.querySelector(
+                'input[type="email"], input[name="email"]'
+            );
 
-            // Message length validation
-            const messageText =
-                contactMessage.value.trim();
-
-
-            if (messageText.length < 10) {
-
-                contactMessage.setCustomValidity(
-                    "Please enter a message containing at least 10 characters."
+            if (emailInput && !isValidEmail(emailInput.value.trim())) {
+                showResponse(
+                    enquiryForm,
+                    "Please enter a valid email address.",
+                    "error"
                 );
-
-                contactForm.reportValidity();
-
-                contactMessage.setCustomValidity("");
-
+                emailInput.focus();
                 return;
-
             }
 
+            const phoneInput = enquiryForm.querySelector(
+                'input[type="tel"], input[name="phone"]'
+            );
 
-            // Show submission status
-            contactResponse.textContent =
-                "Submitting your message...";
+            if (phoneInput && phoneInput.value.trim() &&
+                !isValidPhone(phoneInput.value.trim())) {
+                showResponse(
+                    enquiryForm,
+                    "Please enter a valid contact number.",
+                    "error"
+                );
+                phoneInput.focus();
+                return;
+            }
 
-            contactResponse.style.display =
-                "block";
+            if (!isWebSubmissionAction(enquiryForm)) {
+                showResponse(
+                    enquiryForm,
+                    "The enquiry form is not connected to an online submission service yet. Please configure its form action before submitting.",
+                    "error"
+                );
+                return;
+            }
 
+            const submitButton = enquiryForm.querySelector(
+                'button[type="submit"], input[type="submit"]'
+            );
+
+            const originalButtonText = submitButton
+                ? (submitButton.textContent || submitButton.value)
+                : "";
+
+            if (submitButton) {
+                submitButton.disabled = true;
+
+                if (submitButton.tagName === "INPUT") {
+                    submitButton.value = "Submitting...";
+                } else {
+                    submitButton.textContent = "Submitting...";
+                }
+            }
 
             try {
-
-                const response =
-                    await fetch(
-                        contactForm.action,
-                        {
-                            method: "POST",
-
-                            body:
-                                new FormData(
-                                    contactForm
-                                ),
-
-                            headers: {
-                                "Accept":
-                                    "application/json"
-                            }
+                const response = await fetch(
+                    enquiryForm.getAttribute("action"),
+                    {
+                        method: "POST",
+                        body: new FormData(enquiryForm),
+                        headers: {
+                            Accept: "application/json"
                         }
-                    );
-
-
-                if (response.ok) {
-
-                    contactResponse.textContent =
-                        "Thank you for contacting Bakes by MK. " +
-                        "Your message has been submitted successfully. " +
-                        "We will review your message and get back to you.";
-
-                    contactForm.reset();
-
-                } else {
-
-                    contactResponse.textContent =
-                        "There was a problem submitting your message. " +
-                        "Please try again later.";
-
-                }
-
-            } catch (error) {
-
-                console.error(
-                    "Contact form submission error:",
-                    error
+                    }
                 );
 
-                contactResponse.textContent =
-                    "Unable to submit your message at this time. " +
-                    "Please check your internet connection and try again.";
+                if (!response.ok) {
+                    throw new Error("The enquiry could not be submitted.");
+                }
 
+                const selectedType = enquiryForm.querySelector(
+                    'select[name="enquiry-type"], input[name="enquiry-type"]:checked'
+                );
+
+                const type = selectedType
+                    ? selectedType.value.toLowerCase()
+                    : "product";
+
+                let successMessage;
+
+                if (type.includes("volunteer")) {
+                    successMessage =
+                        "Thank you for your volunteer enquiry. Your details have been submitted successfully. We will review your information and contact you about available opportunities.";
+                } else if (type.includes("sponsor")) {
+                    successMessage =
+                        "Thank you for your sponsorship enquiry. Your details have been submitted successfully. We will review your proposal and contact you to discuss the next steps.";
+                } else {
+                    successMessage =
+                        "Thank you for your enquiry. Your details have been submitted successfully. We will contact you with information about product availability, pricing and any further details you need.";
+                }
+
+                showResponse(enquiryForm, successMessage, "success");
+                enquiryForm.reset();
+                updateConditionalFields();
+            } catch (error) {
+                showResponse(
+                    enquiryForm,
+                    "Sorry, your enquiry could not be submitted. Please check your internet connection and try again.",
+                    "error"
+                );
+            } finally {
+                if (submitButton) {
+                    submitButton.disabled = false;
+
+                    if (submitButton.tagName === "INPUT") {
+                        submitButton.value = originalButtonText;
+                    } else {
+                        submitButton.textContent = originalButtonText;
+                    }
+                }
             }
+        });
 
-        }
-    );
-
-}
-
-
-// =========================================
-// CLEAR CONTACT RESPONSE WHEN RESET
-// =========================================
-
-if (
-    contactForm &&
-    contactResponse
-) {
-
-    contactForm.addEventListener(
-        "reset",
-        function () {
-
-            contactResponse.textContent = "";
-
-            contactResponse.style.display =
-                "none";
-
-        }
-    );
-
-}
-
-
-    // =========================================
-    // CLEAR CONTACT RESPONSE WHEN RESET
-    // =========================================
-
-    if (
-        contactForm &&
-        contactResponse
-    ) {
-
-        contactForm.addEventListener(
-            "reset",
-            function () {
-
-                contactResponse.textContent = "";
-
-                contactResponse.style.display =
-                    "none";
-
-            }
-        );
-
+        enquiryForm.addEventListener("reset", function () {
+            clearResponse(enquiryForm);
+        });
     }
 
+    // Contact form
+    const contactForm = document.getElementById("contactForm");
+
+    if (contactForm) {
+        contactForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            clearResponse(contactForm);
+
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
+                showResponse(
+                    contactForm,
+                    "Please complete all required fields correctly before sending your message.",
+                    "error"
+                );
+                return;
+            }
+
+            const nameInput = contactForm.querySelector(
+                'input[name="name"], input[name="fullName"]'
+            );
+
+            const emailInput = contactForm.querySelector(
+                'input[type="email"], input[name="email"]'
+            );
+
+            const messageInput = contactForm.querySelector(
+                'textarea[name="message"], textarea'
+            );
+
+            const messageTypeInput = contactForm.querySelector(
+                'select[name="messageType"]'
+            );
+
+            const name = nameInput ? nameInput.value.trim() : "";
+            const email = emailInput ? emailInput.value.trim() : "";
+            const message = messageInput ? messageInput.value.trim() : "";
+            const messageType = messageTypeInput
+                ? messageTypeInput.value
+                : "General enquiry";
+
+            if (email && !isValidEmail(email)) {
+                showResponse(
+                    contactForm,
+                    "Please enter a valid email address.",
+                    "error"
+                );
+                emailInput.focus();
+                return;
+            }
+
+            if (message.length < 10) {
+                showResponse(
+                    contactForm,
+                    "Please enter a message containing at least 10 characters.",
+                    "error"
+                );
+
+                if (messageInput) {
+                    messageInput.focus();
+                }
+
+                return;
+            }
+
+            const mailtoAction = contactForm.getAttribute("action") || "";
+
+            if (!mailtoAction.toLowerCase().startsWith("mailto:")) {
+                showResponse(
+                    contactForm,
+                    "The contact email address has not been configured correctly. Please contact the website administrator.",
+                    "error"
+                );
+                return;
+            }
+
+            const recipient = mailtoAction.substring(7).split("?")[0];
+
+            if (!recipient || !recipient.includes("@")) {
+                showResponse(
+                    contactForm,
+                    "The contact email address has not been configured correctly.",
+                    "error"
+                );
+                return;
+            }
+
+            const subject = "Bakes by MK - " + messageType;
+
+            const body =
+                "Name: " + name + "\n" +
+                "Email: " + email + "\n" +
+                "Message type: " + messageType + "\n\n" +
+                "Message:\n" + message;
+
+            const mailtoUrl =
+                "mailto:" + recipient +
+                "?subject=" + encodeURIComponent(subject) +
+                "&body=" + encodeURIComponent(body);
+
+            showResponse(
+                contactForm,
+                "Your email draft is being prepared. Please review it in your email application and press Send to deliver your message.",
+                "success"
+            );
+
+            window.location.href = mailtoUrl;
+        });
+
+        contactForm.addEventListener("reset", function () {
+            clearResponse(contactForm);
+        });
+    }
 });
